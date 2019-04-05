@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.sql.DataSource;
 
-public class ConsultaBBD {
+public class ConsultaBD {
 	
 	PoolConexiones pool = new PoolConexiones();
 	DataSource datasource;

@@ -10,7 +10,6 @@ import java.sql.Statement;
 import java.util.Properties;
 
 import javax.sql.DataSource;
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.dbcp2.BasicDataSourceFactory;
 
 public class PoolConexiones {
@@ -54,4 +53,5 @@ public class PoolConexiones {
 		}
 		return rs;
 	}
+	
 }

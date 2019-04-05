@@ -18,11 +18,8 @@ public class PoolConexiones {
 	DataSource dataSource;
 	
 	public DataSource CrearConexiones() {	
-//		basicDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-//		basicDataSource.setUsername("hr");
-//		basicDataSource.setPassword("PepeJeans");
-//		basicDataSource.setUrl("jdbc:mysql://localhost/termibus?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Madrid");
 		Properties propiedades = new Properties();
+		
 		try {
 			propiedades.load(new FileInputStream("src/main/config/datasource_config.properties"));
 		} catch (FileNotFoundException e) {

@@ -26,11 +26,11 @@ public class Principal {
 			e1.printStackTrace();
 		}
 		
-		rs = pool.generarConsulta(con, "SELECT Nombre FROM linea");
+		rs = pool.generarConsulta(con, "SELECT nombre FROM hotel");
 		
 		try {
 			while(rs.next()) {
-				System.out.println(rs.getString("Nombre"));
+				System.out.println(rs.getString("nombre"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

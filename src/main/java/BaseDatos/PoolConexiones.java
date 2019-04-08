@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.Properties;
 
 import javax.sql.DataSource;
+
 import org.apache.commons.dbcp2.BasicDataSourceFactory;
 
 public class PoolConexiones {
@@ -22,18 +23,18 @@ public class PoolConexiones {
 		try {
 			propiedades.load(new FileInputStream("datasource_config.properties"));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
 	
 		try {
 			dataSource = BasicDataSourceFactory.createDataSource(propiedades);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
 		
 		return dataSource;

@@ -59,10 +59,10 @@ public class ConsultaBD {
 			    		if (i!=1)
 			    			resultado += ",\"";
 			    		if (rs.getMetaData().getColumnTypeName(i).equals("VARCHAR")) {
-			    			resultado += rs.getMetaData().getColumnName(i) + "\":\"";
+			    			resultado += rs.getMetaData().getColumnLabel(i) + "\":\"";
 			    			resultado += rs.getString(i) + "\"";
 			    		} else {
-			    			resultado += rs.getMetaData().getColumnName(i) + "\":";
+			    			resultado += rs.getMetaData().getColumnLabel(i) + "\":";
 			    			resultado += rs.getString(i);
 			    		}
 			    		if (i==numColumnas)

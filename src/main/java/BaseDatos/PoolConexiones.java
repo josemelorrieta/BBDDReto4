@@ -20,7 +20,7 @@ public class PoolConexiones {
 		Properties propiedades = new Properties();
 		
 		try {
-			propiedades.load(new FileInputStream("src/main/config/datasource_config.properties"));
+			propiedades.load(new FileInputStream("datasource_config.properties"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

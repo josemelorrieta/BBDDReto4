@@ -33,6 +33,9 @@ public class ConsultaBD {
 						if (rs.getMetaData().getColumnTypeName(i).equals("VARCHAR")) {
 							resultado += rs.getMetaData().getColumnLabel(i) + "\":\"";
 							resultado += rs.getString(i) + "\"";
+						}else if (rs.getMetaData().getColumnTypeName(i).equals("DATE")) {
+							resultado += rs.getMetaData().getColumnLabel(i) + "\":\"";
+							resultado += (java.util.Date)rs.getDate(i) + "\"";
 						} else {
 							resultado += rs.getMetaData().getColumnLabel(i) + "\":";
 							resultado += rs.getString(i);
@@ -41,7 +44,7 @@ public class ConsultaBD {
 							resultado += "},";
 					}
 				}
-
+				
 				return resultado.substring(0, resultado.length() - 1) + "]";
 			} else {
 				return "";

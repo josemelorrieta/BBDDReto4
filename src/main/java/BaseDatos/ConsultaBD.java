@@ -5,7 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import javax.sql.DataSource;
 import javax.swing.JOptionPane;
@@ -15,6 +16,12 @@ public class ConsultaBD {
 	PoolConexiones pool = new PoolConexiones();
 	DataSource datasource;
 	Connection con = null;
+	SimpleDateFormat df;
+
+	public ConsultaBD () {
+		df = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+		System.out.println(df.toLocalizedPattern());
+	}
 
 	public String consultarToGson(String consulta) {
 		datasource = pool.CrearConexiones();
@@ -33,9 +40,6 @@ public class ConsultaBD {
 						if (rs.getMetaData().getColumnTypeName(i).equals("VARCHAR")) {
 							resultado += rs.getMetaData().getColumnLabel(i) + "\":\"";
 							resultado += rs.getString(i) + "\"";
-						}else if (rs.getMetaData().getColumnTypeName(i).equals("DATE")) {
-							resultado += rs.getMetaData().getColumnLabel(i) + "\":\"";
-							resultado += (java.util.Date)rs.getDate(i) + "\"";
 						} else {
 							resultado += rs.getMetaData().getColumnLabel(i) + "\":";
 							resultado += rs.getString(i);

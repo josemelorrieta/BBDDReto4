@@ -16,12 +16,6 @@ public class ConsultaBD {
 	PoolConexiones pool = new PoolConexiones();
 	DataSource datasource;
 	Connection con = null;
-	SimpleDateFormat df;
-
-	public ConsultaBD () {
-		df = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
-		System.out.println(df.toLocalizedPattern());
-	}
 
 	public String consultarToGson(String consulta) {
 		datasource = pool.CrearConexiones();

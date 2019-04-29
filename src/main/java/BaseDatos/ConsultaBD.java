@@ -100,7 +100,6 @@ public class ConsultaBD {
 			statementGenerico.executeUpdate();
 			return true;
 		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", 0);
 			return false;
 		} finally {
 			try {
@@ -110,5 +109,18 @@ public class ConsultaBD {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	/**
+	 * Crea un array de clases paralelo al array que se le pasa
+	 * @param objetos
+	 * @return array de clases
+	 */
+	public Class[] arrayClases(Object[] objetos) {
+		Class[] clasesObj = new Class[objetos.length];
+		for (int i = 0; i < objetos.length; i++) {
+			clasesObj[i] = objetos[i].getClass();
+		}
+		return clasesObj;
 	}
 }

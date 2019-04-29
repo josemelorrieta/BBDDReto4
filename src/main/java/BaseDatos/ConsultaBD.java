@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 import javax.sql.DataSource;
 import javax.swing.JOptionPane;
@@ -66,8 +64,10 @@ public class ConsultaBD {
 	 * Insert generico a la base de datos
 	 * @param objetos array de Object, si se quiere meter un objeto se debe transformar en un array de Object, no pueden meterse matrizes, utilizar un for para eso
 	 * @param nombreTabla nombre de la tabla a la cual se desea realizar un insert
+	 * 
+	 * @return booleano que indica si se han guardado bien los registros
 	 */
-	public void insertGenerico(Object[] objetos, String nombreTabla) {
+	public boolean insertGenerico(Object[] objetos, String nombreTabla) {
 		datasource = pool.CrearConexiones();
 		try {
 			con = datasource.getConnection();
@@ -98,8 +98,10 @@ public class ConsultaBD {
 				}
 			}
 			statementGenerico.executeUpdate();
+			return true;
 		} catch (SQLException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", 0);
+			return false;
 		} finally {
 			try {
 				if (con != null)

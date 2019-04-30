@@ -118,12 +118,11 @@ public class ConsultaBD {
 				} else {
 					statementGenerico.setString(i + 1, (String) objetos[i]);
 				}
-				return statementGenerico;
 			}
+		return statementGenerico;
 		} catch (SQLException e) {
 			return null;
 		}
-		return null;
 	}
 
 	/**

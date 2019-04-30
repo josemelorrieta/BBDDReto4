@@ -5,8 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 
 import javax.sql.DataSource;
+
+import java.sql.CallableStatement;
 
 public class ConsultaBD {
 
@@ -153,5 +156,31 @@ public class ConsultaBD {
 		}
 		query = (query.substring(0, query.length() - 1)) + ");";
 		return query;
+	}
+	
+	/**
+	 * Llama al procedimiento de la base de datos para guardar la reserva.
+	 * Al guardar en dos tablas el procemiento almacenado hace un rollback si hay algun error
+	 * 
+	 * @param idRsv ID de la reserva
+	 * @param dni DNI del cliente
+	 * @param fechaRsv Fecha en la que se realiza la reserva
+	 * @param fechain Fecha de entrada de la reserva
+	 * @param fechaOut Fecha de salida de la reserva
+	 * @param precio Precio de la reserva
+	 * @param idHab ID de la habitacion reservada
+	 * @return booleano de como ha ido el proceso.
+	 */
+	public boolean guardarReserva (int idRsv, String dni, Date fechaRsv, Date fechaIn, Date fechaOut, double precio, int idHab) {
+		try {
+			con = datasource.getConnection();
+			
+			CallableStatement cst = con.prepareCall("{call guardar_reserva (" + idRsv + ", " + dni + ", " + fechaRsv + "," + fechaIn + "," + fechaOut + "," + precio + ", " + idHab + ")}");
+			cst.execute();
+			return true;
+			
+		} catch (SQLException e) {
+			return false;
+		}
 	}
 }

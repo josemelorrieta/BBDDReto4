@@ -171,13 +171,12 @@ public class ConsultaBD {
 	 * @param idHab ID de la habitacion reservada
 	 * @return booleano de como ha ido el proceso.
 	 */
-	public boolean guardarReserva (int idRsv, String dni, Date fechaRsv, Date fechaIn, Date fechaOut, double precio, int idHab) {
+	public boolean guardarReserva (int idRsv, String dni, String fechaRsv, String fechaIn, String fechaOut, double precio, int idHab) {
 		try {
 			con = datasource.getConnection();
 			
-			CallableStatement cst = con.prepareCall("{call guardar_reserva (" + idRsv + ", " + dni + ", " + fechaRsv + "," + fechaIn + "," + fechaOut + "," + precio + ", " + idHab + ")}");
-			cst.execute();
-			return true;
+			CallableStatement cst = con.prepareCall("{call guardar_reserva (" + idRsv + ", '" + dni + "', '" + fechaRsv + "', '" + fechaIn + "', '" + fechaOut + "', " + precio + ", " + idHab + ")}");
+			return cst.execute();
 			
 		} catch (SQLException e) {
 			return false;

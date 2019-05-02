@@ -41,18 +41,4 @@ public class PoolConexiones {
 
 	}
 	
-	public ResultSet generarConsulta(Connection con, String query) {
-		Statement st = null;
-		ResultSet rs = null;
-		
-		try {
-			st = con.createStatement();
-			rs = st.executeQuery(query);		
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return rs;
-	}
-	
 }

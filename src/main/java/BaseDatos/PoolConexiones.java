@@ -3,14 +3,8 @@ package BaseDatos;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Properties;
-
 import javax.sql.DataSource;
-
 import org.apache.commons.dbcp2.BasicDataSourceFactory;
 
 public class PoolConexiones {

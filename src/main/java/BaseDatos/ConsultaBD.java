@@ -5,23 +5,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
-
 import javax.sql.DataSource;
-
 import java.sql.CallableStatement;
 
 public class ConsultaBD {
 
-	PoolConexiones pool = new PoolConexiones();
-	DataSource datasource;
-	Connection con = null;
+	private PoolConexiones pool;
+	private DataSource datasource;
+	private Connection con;
 
 	public ConsultaBD() {
+		pool = new PoolConexiones();
 		datasource = pool.CrearConexiones();
+		con = null;
 	}
 
-	public String consultarToGson(String consulta) {
+	public String consultarToJson(String consulta) {
 		String resultado = "[";
 		try {
 			con = datasource.getConnection();

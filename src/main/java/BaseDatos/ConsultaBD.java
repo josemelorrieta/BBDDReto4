@@ -20,7 +20,7 @@ public class ConsultaBD {
 		con = null;
 	}
 
-	public String consultarToJson(String consulta) {
+	public String consultarToGson(String consulta) {
 		String resultado = "[";
 		try {
 			con = datasource.getConnection();

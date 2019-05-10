@@ -81,7 +81,7 @@ public class ConsultaBD {
 			String query = prepararQuery(objetos.length, nombreTabla);
 			PreparedStatement statementGenerico = generarStatement(objetos, clasesObj, query);
 			if (statementGenerico != null) {
-				statementGenerico.executeUpdate();
+				statementGenerico.execute();
 			}
 			return true;
 		} catch (SQLException e1) {
@@ -97,10 +97,12 @@ public class ConsultaBD {
 	}
 
 	/**
-	 * Prepara el statement para su insercion a la base de datos organizando cada objeto de la forma que le corresponde
+	 * Prepara el statement para su insercion a la base de datos organizando cada
+	 * objeto de la forma que le corresponde
+	 * 
 	 * @param objetos array de Object
 	 * @param clases  array de clases, debe ser paralelo a objetos
-	 * @param query	  query que se quiere ejecutar
+	 * @param query   query que se quiere ejecutar
 	 * @return Prepared statement listo para ejecutar
 	 */
 	public PreparedStatement generarStatement(Object[] objetos, Class[] clases, String query) {
@@ -121,7 +123,7 @@ public class ConsultaBD {
 					statementGenerico.setString(i + 1, (String) objetos[i]);
 				}
 			}
-		return statementGenerico;
+			return statementGenerico;
 		} catch (SQLException e) {
 			return null;
 		}
@@ -156,29 +158,48 @@ public class ConsultaBD {
 		query = (query.substring(0, query.length() - 1)) + ");";
 		return query;
 	}
-	
+
 	/**
-	 * Llama al procedimiento de la base de datos para guardar la reserva.
-	 * Al guardar en dos tablas el procemiento almacenado hace un rollback si hay algun error
+	 * Llama al procedimiento de la base de datos para guardar la reserva. Al
+	 * guardar en dos tablas el procemiento almacenado hace un rollback si hay algun
+	 * error
 	 * 
-	 * @param idRsv ID de la reserva
-	 * @param dni DNI del cliente
+	 * @param idRsv    ID de la reserva
+	 * @param dni      DNI del cliente
 	 * @param fechaRsv Fecha en la que se realiza la reserva
-	 * @param fechain Fecha de entrada de la reserva
+	 * @param fechain  Fecha de entrada de la reserva
 	 * @param fechaOut Fecha de salida de la reserva
-	 * @param precio Precio de la reserva
-	 * @param idHab ID de la habitacion reservada
+	 * @param precio   Precio de la reserva
+	 * @param idHab    ID de la habitacion reservada
 	 * @return booleano de como ha ido el proceso.
 	 */
-	public boolean guardarReserva (int idRsv, String dni, String fechaRsv, String fechaIn, String fechaOut, double precio, int id, String tipo) {
+	public boolean guardarReserva(int idRsv, String dni, String fechaRsv, String fechaIn, String fechaOut, double precio, int id, String tipo) {
 		try {
 			con = datasource.getConnection();
-			
-			CallableStatement cst = con.prepareCall("{call guardar_reserva_"+tipo+" (" + idRsv + ", '" + dni + "', '" + fechaRsv + "', '" + fechaIn + "', '" + fechaOut + "', " + precio + ", " + id + ")}");
+
+			CallableStatement cst = con.prepareCall("{call guardar_reserva_" + tipo + " (" + idRsv + ", '" + dni + "', '" + fechaRsv + "', '" + fechaIn + "', '" + fechaOut + "', " + precio + ", " + id + ")}");
 			return cst.execute();
-			
+
 		} catch (SQLException e) {
 			return false;
 		}
+	}
+
+	// "'dni' = '12345678R'" <-- Ejemplo de una condicion
+	public boolean deleteGenerico(String tabla, String[] condiciones) {
+		String statement = "DELETE FROM " + tabla + " WHERE ";
+		for (String condi : condiciones) {
+			statement += condi + " AND ";
+		}
+		statement = statement.substring(0, statement.length() - 5);
+
+		try {
+			PreparedStatement statementGenerico = this.con.prepareStatement(statement);
+			return statementGenerico.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
 	}
 }

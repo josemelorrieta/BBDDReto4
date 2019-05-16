@@ -177,7 +177,7 @@ public class ConsultaBD {
 		try {
 			con = datasource.getConnection();
 
-			CallableStatement cst = con.prepareCall("{call guardar_reserva_" + tipo + " (" + idRsv + ", '" + dni + "', '" + fechaRsv + "', '" + fechaIn + "', '" + fechaOut + "', " + precio + ", " + id + ")}");
+			CallableStatement cst = con.prepareCall("{call guardar_reserva (" + idRsv + ", '" + dni + "', '" + fechaRsv + "', '" + fechaIn + "', '" + fechaOut + "', " + precio + ", " + id + ", '" + tipo + "')}");
 			return cst.execute();
 
 		} catch (SQLException e) {

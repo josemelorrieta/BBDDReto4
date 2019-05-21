@@ -185,21 +185,25 @@ public class ConsultaBD {
 		}
 	}
 
-	// "'dni' = '12345678R'" <-- Ejemplo de una condicion
+	
+	/**
+	 * Delete generico para borrar consultas simples, pasar condiciones separadas metidas en un array
+	 * @param tabla de la cual se quiere borrar fila
+	 * @param condiciones array de string con condiciones ej: "'dni' = '12345678R'"
+	 * @return true en caso de haber borrado satisfactoriamente, false en caso de sql exception
+	 */
 	public boolean deleteGenerico(String tabla, String[] condiciones) {
-		String statement = "DELETE FROM " + tabla + " WHERE ";
-		for (String condi : condiciones) {
-			statement += condi + " AND ";
-		}
-		statement = statement.substring(0, statement.length() - 5);
-
 		try {
+			con = datasource.getConnection();
+			String statement = "DELETE FROM " + tabla + " WHERE ";
+			for (String condi : condiciones) {
+				statement += condi + " AND ";
+			}
+			statement = statement.substring(0, statement.length() - 5);
 			PreparedStatement statementGenerico = this.con.prepareStatement(statement);
 			return statementGenerico.execute();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException e1) {
+			return false;
 		}
-
-		return false;
 	}
 }

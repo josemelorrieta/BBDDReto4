@@ -132,7 +132,7 @@ public class ConsultaBD {
 	/**
 	 * Crea un array de clases paralelo al array que se le pasa
 	 * 
-	 * @param objetos
+	 * @param objetos array de objetos al que se le va a hacer una array de clases paralelo
 	 * @return array de clases
 	 */
 	public Class[] arrayClases(Object[] objetos) {
@@ -146,9 +146,9 @@ public class ConsultaBD {
 	/**
 	 * Prepara el query
 	 * 
-	 * @param num
-	 * @param tabla
-	 * @return
+	 * @param num numero de values a insertar
+	 * @param tabla nombre de la tabla
+	 * @return cadena con la query
 	 */
 	public String prepararQuery(int num, String tabla) {
 		String query = "insert into " + tabla + " values(";
@@ -167,10 +167,11 @@ public class ConsultaBD {
 	 * @param idRsv    ID de la reserva
 	 * @param dni      DNI del cliente
 	 * @param fechaRsv Fecha en la que se realiza la reserva
-	 * @param fechain  Fecha de entrada de la reserva
+	 * @param fechaIn  Fecha de entrada de la reserva
 	 * @param fechaOut Fecha de salida de la reserva
 	 * @param precio   Precio de la reserva
-	 * @param idHab    ID de la habitacion reservada
+	 * @param id       ID de la habitacion reservada
+	 * @param tipo     tipo de alojamiento
 	 * @return booleano de como ha ido el proceso.
 	 */
 	public boolean guardarReserva(int idRsv, String dni, String fechaRsv, String fechaIn, String fechaOut, double precio, int id, String tipo) {
